@@ -25,6 +25,9 @@ var informazioniProva = {
 
 
 var urlBaseJSONPlaceholder = 'https://jsonplaceholder.typicode.com/';
+var modifica = false;
+var elementiDaModificare = ['name', 'username', 'address.street', 'address.suite', 'address.city', 'address.zipcode', 'phone', 'website', 'company.name', 'company.catchPhrase', 'company.bs'];
+var containerElementiDaModificare = ['nameContainer', 'surnameContainer', 'streetContainer', 'suiteContainer', 'cityContainer', 'zipCodeContainer', 'phoneContainer','websiteContainer', 'nameCompanyContainer', 'sloganContainer', 'bsContainer'];
 
  $(document).ready(function(){
     //Qua arriva l'informazione dal localStorage
@@ -33,6 +36,18 @@ var urlBaseJSONPlaceholder = 'https://jsonplaceholder.typicode.com/';
     drawMaps(persona);
     requestPostUser(persona.id);
 });
+
+$('#modifyButton').click(function(){
+    modificaTuttiInput();
+    cambiaBottoni();
+});
+
+$('#ripristina').click(function(){
+    modificaTuttiInput();
+    cambiaBottoni();
+});
+
+$('#deleteButton').click(eliminaUtente);
 
 function bindingUser(persona){
     //Se c'è tempo studia una soluzione più funzionale
@@ -103,7 +118,60 @@ function requestPostUser(userId){
         function bottoneClick(e){
             var idpost = e.target.id;
             localStorage.idPost =idpost.substring(3,idpost.length);
-
         }
     });
+}
+
+
+function modificaInput(idTag, idContainer, modify){
+    var newElement;
+    var oldElement = document.getElementById(idTag);
+    if(modify){
+        newElement = document.createElement('input');
+        newElement.value = oldElement.textContent;
+    } else{
+        newElement = document.createElement('div');
+        newElement.textContent = oldElement.value;
+    }
+
+    newElement.name = oldElement.id;
+    newElement.id = oldElement.id;
+    console.log(idContainer);
+
+    oldElement.remove();
+    $('#' + idContainer).append(newElement);
+}
+
+
+function modificaTuttiInput(){
+    modifica = !modifica;
+    for(var i = 0; i < elementiDaModificare.length; i++){
+        modificaInput(elementiDaModificare[i], containerElementiDaModificare[i], modifica);
+    }
+}
+
+function eliminaUtente(){
+    $.ajax({
+        url: urlBaseJSONPlaceholder + 'users/' + informazioniProva.id,
+        type: 'DELETE',
+        success: function(success){
+            alert('Eliminato');
+        }
+    });
+}
+
+
+function cambiaBottoni(){
+    if(modifica){
+        document.getElementById('accettaModifiche').style.visibility = 'visible';
+        document.getElementById('ripristina').style.visibility = 'visible';
+        document.getElementById('modifyButton').style.visibility = 'hidden';
+        document.getElementById('deleteButton').style.visibility = 'hidden';
+    } else{
+        document.getElementById('accettaModifiche').style.visibility = 'hidden';
+        document.getElementById('ripristina').style.visibility = 'hidden';
+        document.getElementById('modifyButton').style.visibility = 'visible';
+        document.getElementById('deleteButton').style.visibility = 'visible';
+    }
+
 }
