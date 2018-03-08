@@ -1,0 +1,9 @@
+body{
+    background-image: url(http://www.miniscript.it/images/1306136252online_user_ip.png)
+}
+table{
+    background-color: white !important;
+}
+table td,tr,th{
+    border: 2px solid black !important;
+}
