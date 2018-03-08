@@ -1,32 +1,36 @@
 //Questo è un oggetto di prova mi serve adesso per andare a vedere come fare prima di utilizzare il localStorage
 var urlBaseJSONPlaceholder = 'https://jsonplaceholder.typicode.com/';
 var modifica = false;
+var personaRipristino;
 var elementiDaModificare = ['name', 'username', 'address.street', 'address.suite', 'address.city', 'address.zipcode', 'phone', 'website', 'company.name', 'company.catchPhrase', 'company.bs'];
-var containerElementiDaModificare = ['nameContainer', 'surnameContainer', 'streetContainer', 'suiteContainer', 'cityContainer', 'zipCodeContainer', 'phoneContainer','websiteContainer', 'nameCompanyContainer', 'sloganContainer', 'bsContainer'];
+var containerElementiDaModificare = ['nameContainer', 'surnameContainer', 'streetContainer', 'suiteContainer', 'cityContainer', 'zipCodeContainer', 'phoneContainer', 'websiteContainer', 'nameCompanyContainer', 'sloganContainer', 'bsContainer'];
 
- $(document).ready(function(){
-    $.getJSON(urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona, function(persona){
+$(document).ready(function () {
+    $.getJSON(urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona, function (persona) {
+        personaRipristino = persona;
         bindingUser(persona);
         drawMaps(persona);
         requestPostUser(persona.id);
     });
 });
 
-$('#modifyButton').click(function(){
+$('#modifyButton').click(function () {
     modificaTuttiInput();
     cambiaBottoni();
 });
 
-$('#ripristina').click(function(){
-    modificaTuttiInput();
-    cambiaBottoni();
-    ripristinaAction();
+$('#ripristina').click(function () {
+    $.getJSON(urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona, function (persona) {
+        modificaTuttiInput();
+        cambiaBottoni();
+        ripristinaAction();
+    });
 });
 
 $('#deleteButton').click(eliminaUtente);
 $('#accettaModifiche').click(inviaNotifiche);
 
-function bindingUser(persona){
+function bindingUser(persona) {
     //Se c'è tempo studia una soluzione più funzionale
     document.getElementById('name').textContent = persona.name;
     document.getElementById('username').textContent = persona.username;
@@ -44,14 +48,14 @@ function bindingUser(persona){
 
 //Questa funzione mi permette di costruire la mappa di google, centrandola nelle coordinate fornite 
 // dal servizio di jsonplaceholder
-function drawMaps(persona){
+function drawMaps(persona) {
     //Preparo l'accentramento della mappa
     var mapProperties = {
         center: new google.maps.LatLng(persona.address.geo.lat, persona.address.geo.lng),
         zoom: 16
     };
     //Genero la mappa
-    var map = new google.maps.Map(document.getElementById('mapSection'), mapProperties); 
+    var map = new google.maps.Map(document.getElementById('mapSection'), mapProperties);
     //Posiziono il marker
     new google.maps.Marker({
         position: mapProperties.center,
@@ -61,11 +65,11 @@ function drawMaps(persona){
 
 
 //Creazione della tabella dei post
-function requestPostUser(userId){
+function requestPostUser(userId) {
     var url = urlBaseJSONPlaceholder + 'posts?userId=' + 4;
-    $.getJSON(url, function(result){
-        
-        for(var i = 0; i < result.length; i++){
+    $.getJSON(url, function (result) {
+
+        for (var i = 0; i < result.length; i++) {
             //Creo il td del nome
             var elementTdNamePost = document.createElement('td');
             elementTdNamePost.id = 'tdName' + i;
@@ -78,7 +82,7 @@ function requestPostUser(userId){
             var button = document.createElement('button');
             button.id = 'btn' + result[i].id;
             button.textContent = 'dettagli';
-            button.addEventListener('click',bottoneClick);
+            button.addEventListener('click', bottoneClick);
             elementTdDetailPost.append(button);
 
             //Creo il tr che contiene i td appena creati
@@ -92,21 +96,21 @@ function requestPostUser(userId){
         }
 
 
-        function bottoneClick(e){
+        function bottoneClick(e) {
             var idpost = e.target.id;
-            localStorage.idPost =idpost.substring(3,idpost.length);
+            localStorage.idPost = idpost.substring(3, idpost.length);
         }
     });
 }
 
 
-function modificaInput(idTag, idContainer, modify){
+function modificaInput(idTag, idContainer, modify) {
     var newElement;
     var oldElement = document.getElementById(idTag);
-    if(modify){
+    if (modify) {
         newElement = document.createElement('input');
         newElement.value = oldElement.textContent;
-    } else{
+    } else {
         newElement = document.createElement('div');
         newElement.textContent = oldElement.value;
     }
@@ -119,31 +123,31 @@ function modificaInput(idTag, idContainer, modify){
 }
 
 
-function modificaTuttiInput(){
+function modificaTuttiInput() {
     modifica = !modifica;
-    for(var i = 0; i < elementiDaModificare.length; i++){
+    for (var i = 0; i < elementiDaModificare.length; i++) {
         modificaInput(elementiDaModificare[i], containerElementiDaModificare[i], modifica);
     }
 }
 
-function eliminaUtente(){
+function eliminaUtente() {
     $.ajax({
-        url: urlBaseJSONPlaceholder + 'users/' + informazioniProva.id,
+        url: urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona,
         type: 'DELETE',
-        success: function(success){
+        success: function (success) {
             alert('Eliminato');
         }
     });
 }
 
 
-function cambiaBottoni(){
-    if(modifica){
+function cambiaBottoni() {
+    if (modifica) {
         document.getElementById('accettaModifiche').style.visibility = 'visible';
         document.getElementById('ripristina').style.visibility = 'visible';
         document.getElementById('modifyButton').style.visibility = 'hidden';
         document.getElementById('deleteButton').style.visibility = 'hidden';
-    } else{
+    } else {
         document.getElementById('accettaModifiche').style.visibility = 'hidden';
         document.getElementById('ripristina').style.visibility = 'hidden';
         document.getElementById('modifyButton').style.visibility = 'visible';
@@ -151,28 +155,28 @@ function cambiaBottoni(){
     }
 }
 
-function inviaNotifiche(){
+function inviaNotifiche() {
     $.ajax({
-        url: urlBaseJSONPlaceholder + 'users/' + informazioniProva.id,
+        url: urlBaseJSONPlaceholder + 'users/' + localStorage.idPe,
         type: 'put',
         data: $('#formDati').serialize(),
-        success: function(){
+        success: function () {
             alert('Modifica effettuata');
         }
     });
 }
 
 
-function ripristinaAction(){
-    document.getElementById('name').textContent = informazioniProva.name;
-    document.getElementById('username').textContent = informazioniProva.username;
-    document.getElementById('address.street').textContent = informazioniProva.address.street;
-    document.getElementById('address.suite').textContent = informazioniProva.address.suite;
-    document.getElementById('address.city').textContent = informazioniProva.address.city;
-    document.getElementById('address.zipcode').textContent = informazioniProva.address.zipcode;
-    document.getElementById('phone').textContent = informazioniProva.phone;
-    document.getElementById('website').textContent = informazioniProva.website;
-    document.getElementById('company.name').textContent = informazioniProva.company.name;
-    document.getElementById('company.catchPhrase').textContent = informazioniProva.company.catchPhrase;
-    document.getElementById('company.bs').textContent = informazioniProva.company.bs;
+function ripristinaAction() {
+    document.getElementById('name').textContent = personaRipristino.name;
+    document.getElementById('username').textContent = personaRipristino.username;
+    document.getElementById('address.street').textContent = personaRipristino.address.street;
+    document.getElementById('address.suite').textContent = personaRipristino.address.suite;
+    document.getElementById('address.city').textContent = personaRipristino.address.city;
+    document.getElementById('address.zipcode').textContent = personaRipristino.address.zipcode;
+    document.getElementById('phone').textContent = personaRipristino.phone;
+    document.getElementById('website').textContent = personaRipristino.website;
+    document.getElementById('company.name').textContent = personaRipristino.company.name;
+    document.getElementById('company.catchPhrase').textContent = personaRipristino.company.catchPhrase;
+    document.getElementById('company.bs').textContent = personaRipristino.company.bs;
 }

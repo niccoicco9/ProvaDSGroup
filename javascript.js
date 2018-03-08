@@ -1,7 +1,8 @@
+/* jshint esversion: 6 */
 
 window.addEventListener('load',function(){
     pageLoad();
-})
+});
 
 const user = fetch('https://jsonplaceholder.typicode.com/users')
   .then(response => response.json())
@@ -40,10 +41,6 @@ function pageLoad(){
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
-
-            $('.dettagli').click(function(){
-                localStorage.setItem('td','td1');
-            })
         }
 
         function bottonePersona(e){
@@ -51,5 +48,5 @@ function pageLoad(){
             console.log(idPersona.substring(3,idPersona.length));
             localStorage.idPersona = idPersona.substring(7,idPersona.length);
         }
-    })
+    });
  }
