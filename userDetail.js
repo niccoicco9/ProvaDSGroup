@@ -24,11 +24,14 @@ var informazioniProva = {
   };
 
 
+var urlBaseJSONPlaceholder = 'https://jsonplaceholder.typicode.com/';
+
  $(document).ready(function(){
     //Qua arriva l'informazione dal localStorage
     var persona = informazioniProva;
     bindingUser(persona);
     drawMaps(persona);
+    requestPostUser(persona.id);
 });
 
 function bindingUser(persona){
@@ -47,18 +50,60 @@ function bindingUser(persona){
 }
 
 
+//Questa funzione mi permette di costruire la mappa di google, centrandola nelle coordinate fornite 
+// dal servizio di jsonplaceholder
 function drawMaps(persona){
-    console.log(persona);
     //Preparo l'accentramento della mappa
     var mapProperties = {
         center: new google.maps.LatLng(persona.address.geo.lat, persona.address.geo.lng),
         zoom: 16
     };
     //Genero la mappa
-    var map = new google.maps.Map(document.getElementById('mappa'), mapProperties); 
+    var map = new google.maps.Map(document.getElementById('mapSection'), mapProperties); 
     //Posiziono il marker
     new google.maps.Marker({
         position: mapProperties.center,
         map: map
+    });
+}
+
+
+//Creazione della tabella dei post
+function requestPostUser(userId){
+    var url = urlBaseJSONPlaceholder + 'posts?userId=' + 4;
+    $.getJSON(url, function(result){
+        
+        for(var i = 0; i < result.length; i++){
+            //Creo il td del nome
+            var elementTdNamePost = document.createElement('td');
+            elementTdNamePost.id = 'tdName' + i;
+            elementTdNamePost.textContent = result[i].title;
+
+            //Creo il td del link della pagina del dettaglio
+            var elementTdDetailPost = document.createElement('td');
+            elementTdDetailPost.id = 'tdDetail' + i;
+
+            var button = document.createElement('button');
+            button.id = 'btn' + result[i].id;
+            button.textContent = 'dettagli';
+            button.addEventListener('click',bottoneClick);
+            elementTdDetailPost.append(button);
+
+            //Creo il tr che contiene i td appena creati
+            var elementTr = document.createElement('tr');
+            elementTr.id = 'tr' + i;
+            elementTr.append(elementTdNamePost);
+            elementTr.append(elementTdDetailPost);
+
+            //Aggiungo la riga alla tabella
+            $('#bodyTable').append(elementTr);
+        }
+
+
+        function bottoneClick(e){
+            var idpost = e.target.id;
+            localStorage.idPost =idpost.substring(3,idpost.length);
+
+        }
     });
 }

@@ -66,10 +66,30 @@
                 <div id="company.bs" name="company.bs"></div>
             </article>
         </form>
+
+        <div id="actionButton">
+            <button>Modifica Utente</button>
+            <button>Cancella Post</button>
+        </div>
     </section>
 
-    <section id="mappa"></section>
+    <section id="mapSection"></section>
 
+    <section id="tableSection">
+        <div>Post</div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Dettagli</td>
+                </tr>
+            </thead>
+
+            <tbody id="bodyTable">
+
+            </tbody>
+        </table>
+    </section>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="userDetail.js"></script>
