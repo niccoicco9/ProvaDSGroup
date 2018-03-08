@@ -45,9 +45,11 @@ $('#modifyButton').click(function(){
 $('#ripristina').click(function(){
     modificaTuttiInput();
     cambiaBottoni();
+    ripristinaAction();
 });
 
 $('#deleteButton').click(eliminaUtente);
+$('#accettaModifiche').click(inviaNotifiche);
 
 function bindingUser(persona){
     //Se c'è tempo studia una soluzione più funzionale
@@ -136,7 +138,6 @@ function modificaInput(idTag, idContainer, modify){
 
     newElement.name = oldElement.id;
     newElement.id = oldElement.id;
-    console.log(idContainer);
 
     oldElement.remove();
     $('#' + idContainer).append(newElement);
@@ -173,5 +174,30 @@ function cambiaBottoni(){
         document.getElementById('modifyButton').style.visibility = 'visible';
         document.getElementById('deleteButton').style.visibility = 'visible';
     }
+}
 
+function inviaNotifiche(){
+    $.ajax({
+        url: urlBaseJSONPlaceholder + 'users/' + informazioniProva.id,
+        type: 'put',
+        data: $('#formDati').serialize(),
+        success: function(){
+            alert('Modifica effettuata');
+        }
+    });
+}
+
+
+function ripristinaAction(){
+    document.getElementById('name').textContent = informazioniProva.name;
+    document.getElementById('username').textContent = informazioniProva.username;
+    document.getElementById('address.street').textContent = informazioniProva.address.street;
+    document.getElementById('address.suite').textContent = informazioniProva.address.suite;
+    document.getElementById('address.city').textContent = informazioniProva.address.city;
+    document.getElementById('address.zipcode').textContent = informazioniProva.address.zipcode;
+    document.getElementById('phone').textContent = informazioniProva.phone;
+    document.getElementById('website').textContent = informazioniProva.website;
+    document.getElementById('company.name').textContent = informazioniProva.company.name;
+    document.getElementById('company.catchPhrase').textContent = informazioniProva.company.catchPhrase;
+    document.getElementById('company.bs').textContent = informazioniProva.company.bs;
 }
