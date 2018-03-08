@@ -1,0 +1,23 @@
+{
+  "name": "provadsgroup",
+  "version": "1.0.0",
+  "description": "Prova intermedia DSGroup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wantedlex/ProvaDSGroup.git"
+  },
+  "author": "Alessandro Corrado Vanessa Militello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wantedlex/ProvaDSGroup/issues"
+  },
+  "homepage": "https://github.com/wantedlex/ProvaDSGroup#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.3.1"
+  }
+}
