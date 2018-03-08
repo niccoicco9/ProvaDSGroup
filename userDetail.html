@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dettagli utente</title>
+    <link rel="stylesheet" href="userDetail.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <section id="userData">
+        <form action="">
+            <article id="nameContainer"></article>
+                <label for="name"> Nome: </label>
+                <div id="name" name="name"></div>
+            </article>
+
+            <article id="surnameContainer">
+                <label for="username">Username: </label>
+                <div id="username" name="username"></div>
+            </article>
+
+            <article id="streetContainer">
+                <label for="address.street">Strada: </label>
+                <div id="address.street" name="address.street"></div>
+            </article>
+
+            <article id="suiteContainer">
+                <label for="address.suite">Appartamento: </label>
+                <div id="address.suite" name="address.suite"></div>
+            </article>
+
+            <article id="cityContainer">
+                <label for="address.city">Città: </label>
+                <div id="address.city" name="address.city"></div>
+            </article>
+
+            <article id="zipCodeContainer">
+                <label for="address.zipcode">CAP: </label>
+                <div id="address.zipcode" name="address.zipcode"></div>
+            </article>
+
+            <article id="phoneContainer">
+                <label for="phone">Telefono: </label>
+                <div name="phone" id="phone"></div>
+            </article>
+
+            <article id="websiteContainer">
+                <label for="website">Sito web: </label>
+                <div id="website" name="website"></div>
+            </article>
+
+            <article id="nameCompanyContainer">
+                <label for="company.name">Nome compagnia: </label>
+                <div id="company.name" name="company.name"></div>
+            </article>
+
+            <article id="sloganContainer">
+                <label for="company.catchPhrase">Slogan: </label>
+                <div id="company.catchPhrase" name="company.catchPhrase"></div>
+            </article>
+
+            <article id="bsContainer">
+                <label for="company.bs">Mansione: </label>
+                <div id="company.bs" name="company.bs"></div>
+            </article>
+        </form>
+    </section>
+
+    <section id="mappa"></section>
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="userDetail.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1EHAsI359U-bXcnQc_2QdDCZ7eG4T8ZA"></script>
+</body>
+</html>
