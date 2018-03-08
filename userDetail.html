@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dettagli utente</title>
+    <link rel="stylesheet" href="userDetail.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <section id="userDataSection">
+        <form action="" id="formDati">
+            <article id="nameContainer" class="containerDati">
+                <label for="name"> Nome: </label>
+                <div id="name" name="name"></div>
+            </article>
+
+            <article id="surnameContainer" class="containerDati">
+                <label for="username">Username: </label>
+                <div id="username" name="username"></div>
+            </article>
+
+            <article id="streetContainer" class="containerDati">
+                <label for="address.street">Strada: </label>
+                <div id="address.street" name="address.street"></div>
+            </article>
+
+            <article id="suiteContainer" class="containerDati">
+                <label for="address.suite">Appartamento: </label>
+                <div id="address.suite" name="address.suite"></div>
+            </article>
+
+            <article id="cityContainer" class="containerDati">
+                <label for="address.city">Città: </label>
+                <div id="address.city" name="address.city"></div>
+            </article>
+
+            <article id="zipCodeContainer" class="containerDati">
+                <label for="address.zipcode">CAP: </label>
+                <div id="address.zipcode" name="address.zipcode"></div>
+            </article>
+
+            <article id="phoneContainer" class="containerDati">
+                <label for="phone">Telefono: </label>
+                <div name="phone" id="phone"></div>
+            </article>
+
+            <article id="websiteContainer" class="containerDati">
+                <label for="website">Sito web: </label>
+                <div id="website" name="website"></div>
+            </article>
+
+            <article id="nameCompanyContainer" class="containerDati">
+                <label for="company.name">Nome compagnia: </label>
+                <div id="company.name" name="company.name"></div>
+            </article>
+
+            <article id="sloganContainer" class="containerDati">
+                <label for="company.catchPhrase">Slogan: </label>
+                <div id="company.catchPhrase" name="company.catchPhrase"></div>
+            </article>
+
+            <article id="bsContainer" class="containerDati">
+                <label for="company.bs">Mansione: </label>
+                <div id="company.bs" name="company.bs"></div>
+            </article>
+        </form>
+
+        <div id="actionButton">
+            <button id="modifyButton">Modifica Utente</button>
+            <button id="deleteButton">Cancella Utente</button>
+            <button id="accettaModifiche" style="visibility: hidden">Accetta</button>
+            <button id="ripristina" style="visibility: hidden">Ripristina</button>
+        </div>
+    </section>
+
+    <section id="mapSection"></section>
+
+    <section id="tableSection">
+        <div>Post</div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Dettagli</td>
+                </tr>
+            </thead>
+
+            <tbody id="bodyTable">
+
+            </tbody>
+        </table>
+    </section>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="userDetail.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1EHAsI359U-bXcnQc_2QdDCZ7eG4T8ZA"></script>
+</body>
+</html>
