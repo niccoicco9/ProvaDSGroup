@@ -22,7 +22,7 @@ function pageLoad(){
             const td2 = document.createElement('td');
             const td3 = document.createElement('td');
             
-            link.href = '#'; //'userDetail.html?id=';
+            link.href = 'userDetail.html';
             link.id = 'persona' + id;
             link.addEventListener('click', bottonePersona);
             link2.href = 'indexPost.html';
@@ -49,7 +49,7 @@ function pageLoad(){
         function bottonePersona(e){
             var idPersona = e.target.id;
             console.log(idPersona.substring(3,idPersona.length));
-            localStorage.idPersona = idPersona.substring(3,idPersona.length);
+            localStorage.idPersona = idPersona.substring(7,idPersona.length);
         }
     })
  }
