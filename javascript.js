@@ -7,7 +7,7 @@ const user = fetch('https://jsonplaceholder.typicode.com/users')
   .then(response => response.json())
   .then(json => json);
 
-function pageLoad( ){
+function pageLoad(){
     user.then(function(data){
 
         for(let i = 0; i< data.length; i++){
@@ -23,7 +23,7 @@ function pageLoad( ){
             
             link.href = 'userDetail';
             link2.href = 'userDetail';
-            
+
             td.innerHTML = user.name;
             td1.innerHTML = user.username;
             link.innerHTML = 'Dettagli';
