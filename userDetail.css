@@ -1,3 +1,6 @@
+body{
+    background-image: url(http://www.miniscript.it/images/1306136252online_user_ip.png)
+}
 #mappa{
     width: 100%;
     height: 300px;
@@ -13,7 +16,6 @@
 label{
     margin: 0px 10px;
 }
-
 section {
     margin: 0px 20px 40px 20px;
 }
@@ -23,7 +25,6 @@ section {
     flex-direction: row;
     justify-content: space-around;
 }
-
 #actionButton{
     display: flex;
     flex-direction: column;
@@ -31,6 +32,13 @@ section {
 #actionButton button{
     margin: 20px;
 }
-
-
-
+#userDataSection{
+    border: 1px solid black;
+    background-color: white;
+}
+#caratteristiche{
+    background-color: white;
+}
+table td,tr,th{
+    border: 2px solid black !important;
+}

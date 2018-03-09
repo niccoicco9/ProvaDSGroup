@@ -79,9 +79,10 @@ function requestPostUser(userId) {
             var elementTdDetailPost = document.createElement('td');
             elementTdDetailPost.id = 'tdDetail' + i;
 
-            var button = document.createElement('button');
+            var button = document.createElement('a');
             button.id = 'btn' + result[i].id;
-            button.textContent = 'dettagli';
+            button.textContent = 'Dettagli';
+            button.href = 'indexPost.html';
             button.addEventListener('click', bottoneClick);
             elementTdDetailPost.append(button);
 
