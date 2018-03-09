@@ -1,0 +1,9 @@
+body{
+    background-image: url(http://www.miniscript.it/images/1306136252online_user_ip.png)
+}
+#contenitore{
+    background-color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 20px;
+}
