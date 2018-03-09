@@ -1,210 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <title>Ricerca Utenti</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Users</h1>
-        <h3>Ricerca utenti</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Cognome</th>
-                    <th>Dettagli</th>
-                    <th>Post</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
-    <div class="container">
 
-        <form class="well form-horizontal" action=" " method="post"  id="contact_form">
-    <fieldset>
-    
-    <!-- Form Name -->
-    <legend><h3>Inserisci i tuoi dati</h3></legend>
-    
-    <!-- Text input-->
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label">Name</label>  
-      <div class="col-md-4 inputGroupContainer">
-      <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input  name="first_name" placeholder="Name" class="form-control"  type="text">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <title>Ricerca Utenti</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Users</h1>
+    <h3>Ricerca utenti</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Dettagli</th>
+          <th>Post</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+  <div class="container">
+
+    <form class="well form-horizontal" action=" " method="post" id="formNuovoUtente">
+      <fieldset>
+
+        <!-- Form Name -->
+        <legend>
+          <h3>Inserisci i tuoi dati</h3>
+        </legend>
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Name</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input name="name" id="name" placeholder="Name" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Text input-->
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" >Username</label> 
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input name="last_name" placeholder="Username" class="form-control"  type="text">
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Username</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input name="username" id="username" placeholder="Username" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Text input-->
-           <div class="form-group">
-      <label class="col-md-4 control-label">E-Mail</label>  
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-      <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">E-Mail</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-envelope"></i>
+              </span>
+              <input name="email" id="email" placeholder="E-Mail Address" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    
-    <!-- Text input-->
-           
-    <div class="form-group">
-      <label class="col-md-4 control-label">Phone </label>  
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
+
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Phone </label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-earphone"></i>
+              </span>
+              <input name="phone" id="phone" placeholder="(845)555-1212" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Text input-->
-          
-    <div class="form-group">
-      <label class="col-md-4 control-label">Address</label>  
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-      <input name="address" placeholder="Address" class="form-control" type="text">
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Street</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-home"></i>
+              </span>
+              <input name="address.street" id="address.street" placeholder="Address" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Text input-->
-     
-    <div class="form-group">
-      <label class="col-md-4 control-label">City</label>  
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-      <input name="city" placeholder="City" class="form-control"  type="text">
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Apt</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-home"></i>
+              </span>
+              <input name="address.suite" id="address.suite" placeholder="Suite" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Select Basic -->
-       
-    <div class="form-group"> 
-      <label class="col-md-4 control-label">State</label>
-        <div class="col-md-4 selectContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-        <select name="state" class="form-control selectpicker" >
-          <option value=" " >Please select your state</option>
-          <option>Alabama</option>
-          <option>Alaska</option>
-          <option >Arizona</option>
-          <option >Arkansas</option>
-          <option >California</option>
-          <option >Colorado</option>
-          <option >Connecticut</option>
-          <option >Delaware</option>
-          <option >District of Columbia</option>
-          <option> Florida</option>
-          <option >Georgia</option>
-          <option >Hawaii</option>
-          <option >daho</option>
-          <option >Illinois</option>
-          <option >Indiana</option>
-          <option >Iowa</option>
-          <option> Kansas</option>
-          <option >Kentucky</option>
-          <option >Louisiana</option>
-          <option>Maine</option>
-          <option >Maryland</option>
-          <option> Mass</option>
-          <option >Michigan</option>
-          <option >Minnesota</option>
-          <option>Mississippi</option>
-          <option>Missouri</option>
-          <option>Montana</option>
-          <option>Nebraska</option>
-          <option>Nevada</option>
-          <option>New Hampshire</option>
-          <option>New Jersey</option>
-          <option>New Mexico</option>
-          <option>New York</option>
-          <option>North Carolina</option>
-          <option>North Dakota</option>
-          <option>Ohio</option>
-          <option>Oklahoma</option>
-          <option>Oregon</option>
-          <option>Pennsylvania</option>
-          <option>Rhode Island</option>
-          <option>South Carolina</option>
-          <option>South Dakota</option>
-          <option>Tennessee</option>
-          <option>Texas</option>
-          <option> Uttah</option>
-          <option>Vermont</option>
-          <option>Virginia</option>
-          <option >Washington</option>
-          <option >West Virginia</option>
-          <option>Wisconsin</option>
-          <option >Wyoming</option>
-        </select>
-      </div>
-    </div>
-    </div>
-    
-    <!-- Text input-->
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label">Cap</label>  
-        <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-      <input name="zip" placeholder="Cap" class="form-control"  type="text">
+
+
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">City</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-home"></i>
+              </span>
+              <input name="address.city" id="address.city" placeholder="City" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-    </div>
-    </div>
-    
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label">Sito Web</label>  
-       <div class="col-md-4 inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-      <input name="website" placeholder="Sito Web" class="form-control" type="text">
+
+
+        <!-- Text input-->
+
+        <div class="form-group">
+          <label class="col-md-4 control-label">Zip Code</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-home"></i>
+              </span>
+              <input name="address.zipcode" id="address.zipcode" placeholder="Address" class="form-control" type="text">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- Button -->
-    <div class="form-group">
-      <label class="col-md-4 control-label"></label>
-      <div class="col-md-4">
-        <button type="submit" class="btn btn-warning" >Send <span class="glyphicon glyphicon-send"></span></button>
-      </div>
-    </div>
-    
-    </fieldset>
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Sito Web</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-globe"></i>
+              </span>
+              <input name="website" id="website" placeholder="Sito Web" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Company Name</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-globe"></i>
+              </span>
+              <input name="company.name" id="company.name" placeholder="Sito Web" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Company Catch Phrase</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-globe"></i>
+              </span>
+              <input name="company.catchPhrase" id="company.catchPhrasde" placeholder="Sito Web" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label">Business</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-globe"></i>
+              </span>
+              <input name="company.bs" id="company.bs" placeholder="Sito Web" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+
+
+        
+
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label"></label>
+          <div class="col-md-4">
+            <button id="sendNewUser" class="btn btn-warning">Send
+              <span class="glyphicon glyphicon-send"></span>
+            </button>
+          </div>
+        </div>
+
+      </fieldset>
     </form>
-    </div>
-        </div><!-- /.container -->
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="javascript.js"></script>
+  </div>
+  </div>
+  <!-- /.container -->
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="javascript.js"></script>
 </body>
+
 </html>
