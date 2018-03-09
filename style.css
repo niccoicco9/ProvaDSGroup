@@ -7,3 +7,11 @@ table{
 table td,tr,th{
     border: 2px solid black !important;
 }
+form{
+    background-color: white !important;
+}
+button{
+    background-color: steelblue !important;
+    border-color: skyblue !important;
+}
+#success_message{ display: none;}
