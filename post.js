@@ -7,18 +7,8 @@ function pageLoad() {
         .then(response => response.json())
         .then(function (data) {
             console.log(data);
-            for (let i = 0; i < data.length; i++) {
-                const cont = document.getElementById('contenitore');
-                const nome = document.createElement('div');
-                const corpo = document.createElement('div');
-                const post = data[i];
-
-                nome.innerHTML = post.title;
-                corpo.innerHTML = post.body;
-
-                cont.appendChild(nome);
-                cont.appendChild(corpo);
-            }
+            document.getElementById('title').textContent += '\t' + data.title;
+            document.getElementById('bodyPost').textContent = data.body;
         });
 }
 
