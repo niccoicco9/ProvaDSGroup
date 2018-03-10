@@ -15,3 +15,11 @@ button{
     border-color: skyblue !important;
 }
 #success_message{ display: none;}
+
+.actionButton{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+

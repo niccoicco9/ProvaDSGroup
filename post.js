@@ -19,11 +19,7 @@ function pageLoad() {
 }
 
 function deleteButtonAction(){
-    $.ajax({
-        type: 'delete',
-        url: urlBasePost + localStorage.idPost,
-        success: alertMessaggio('La cancellazione del post è stata effettuata')
-    });
+    eliminaRecord(urlBasePost + localStorage.idPost);
 }
 
 function modifyButtonAction(){
@@ -33,10 +29,12 @@ function modifyButtonAction(){
     eliminaInsiemeElementi(['title','body', 'btnDelete', 'btnModify']);
     $('#contenitore').append(
         creaInput(title,'title') + 
-        creaInput(body,'body') + 
+        creaRiempiElementoConId('textarea', body, 'body') + 
         creaBottoneConImmagine('btnAccept','IMG/accetta.png','Accetta') + 
         creaBottoneConImmagine('btnRefused','IMG/ripristina.png','Ripristina')
     );
+    
+
     $('#btnAccept').click(accettaModificheAction);
     $('#btnRefused').click(rifiutaModificheAction);
 }
