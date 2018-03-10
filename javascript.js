@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-var urlUserPost = 'https://jsonplaceholder.typicode.com/users/';
+var urlUserPost = 'https://jsonplaceholder.typicode.com/users';
 
 
 window.addEventListener('load',function(){
@@ -7,7 +7,7 @@ window.addEventListener('load',function(){
 });
 
 
-const user = fetch('https://jsonplaceholder.typicode.com/users')
+const user = fetch(urlUserPost)
   .then(response => response.json())
   .then(json => json);
 
@@ -51,9 +51,8 @@ function pageLoad(){
             console.log(idPersona.substring(3,idPersona.length));
             localStorage.idPersona = idPersona.substring(7,idPersona.length);
         }
-
-        $('#sendNewUser').click(newUser);
     });
+    $('#sendNewUser').click(newUser);
  }
 
 
