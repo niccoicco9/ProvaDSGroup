@@ -10,67 +10,63 @@ function pageLoad() {
         .then(response => response.json())
         .then(function (data) {
             actualPost = data;
-            document.getElementById('title').textContent += '\t' + data.title;
-            document.getElementById('body').textContent = data.body;
+            document.getElementById('title').textContent = actualPost.title;
+            document.getElementById('body').textContent = actualPost.body;
             
-            loadButtonAction('btn1', deleteButtonAction);
-            loadButtonAction('btn2', modifyButtonAction);
+            $('#btnDelete').click(deleteButtonAction);
+            $('#btnModify').click(modifyButtonAction);
         });
-}
-
-
-function loadButtonAction(idButton, action){
-    document.getElementById(idButton).addEventListener('click', action);
 }
 
 function deleteButtonAction(){
     $.ajax({
         type: 'delete',
         url: urlBasePost + localStorage.idPost,
-        success: eliminazionePostOk
+        success: alertMessaggio('La cancellazione del post è stata effettuata')
     });
-}
-
-function eliminazionePostOk(){
-    alert('Hai effettuato correttamente la cancellazione del post');
 }
 
 function modifyButtonAction(){
     var title = document.getElementById('title').textContent;
     var body = document.getElementById('body').textContent;
 
-    document.getElementById('title').remove();
-    document.getElementById('body').remove();
-    $('#contenitore').append(creaInput(title,'title') + creaInput(body,'body'));
-    nuovaFunzionalitaBottone('#btn1', 'Accetta Modifiche');
-    nuovaFunzionalitaBottone('#btn2', 'Rifiuta Modifiche', modifyButtonAction, rifiutaModificheAction);
+    eliminaInsiemeElementi(['title','body', 'btnDelete', 'btnModify']);
+    $('#contenitore').append(
+        creaInput(title,'title') + 
+        creaInput(body,'body') + 
+        creaBottoneConImmagine('btnAccept','IMG/accetta.png','Accetta') + 
+        creaBottoneConImmagine('btnRefused','IMG/ripristina.png','Ripristina')
+    );
+    $('#btnAccept').click(accettaModificheAction);
+    $('#btnRefused').click(rifiutaModificheAction);
 }
 
 
-function creaRiempiElementoConId(nomeElemento,valore,id,classe){
-    return '<' + nomeElemento + ' id = "' + id + '" class="' + classe + '">' + valore + '</' + nomeElemento + '>';
-}
-
-function creaInput(valore, id){
-    return '<input type="text" value="' + valore + '" id ="' + id + '" class="stileInput"><br>';
-}
 
 
-function nuovaFunzionalitaBottone(id, testo, funzioneVecchia, funzioneNuova){
-    $(id).text(testo);
-    //$(id).unbind('click');
-    //$(id).click(funzione);
-    document.getElementById(id).removeEventListener('click',funzioneVecchia);
-    document.getElementById(id).removeEventListener('click',funzioneNuova);
-}
 
 function rifiutaModificheAction(){
-    console.log($('#btn2'));
-    /*document.getElementById('title').remove();
-    //document.getElementById('body').remove();
-    alert(actualPost.title);
-    creaRiempiElementoConId('div', actualPost.title, 'title');
-    //creaRiempiElementoConId('div', actualPost.body, 'body');
-    nuovaFunzionalitaBottone('#btn1', 'Cancella Post', deleteButtonAction);
-    nuovaFunzionalitaBottone('#btn2', 'Modifica Post', modifyButtonAction);*/
+    eliminaInsiemeElementi(['title','body', 'btnAccept', 'btnRefused']);
+    $('#contenitore').append(
+        creaRiempiElementoConId('h3', actualPost.title, 'title') +
+        creaRiempiElementoConId('div', actualPost.body, 'body') +
+        creaBottoneConImmagine('btnDelete', 'IMG/cancella.png', 'Cancella Post') +
+        creaBottoneConImmagine('btnModify', 'IMG/modifica.png', 'Modifica')
+    );
+    $('#btnDelete').click(deleteButtonAction);
+    $('#btnModify').click(modifyButtonAction);
+}
+
+function accettaModificheAction(){
+    //Modificare l'oggetto actualPost mi consente in un colpo solo di tenere aggiornati i dati
+    //localmente e di poter poi andare a ripristinare gli elementi precedenti
+    actualPost.title = $('#title').val();
+    actualPost.body = $('#body').val();
+    $.ajax({
+        url: urlBasePost + '/' + actualPost.id,
+        data: actualPost,
+        type: 'put',
+        success: alertMessaggio('Modifica effettuata')
+    });
+    rifiutaModificheAction();   //Così facendo vado a ripristinare gli elementi precedenti
 }
