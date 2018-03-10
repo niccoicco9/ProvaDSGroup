@@ -29,7 +29,9 @@ function pageLoad(){
             link.href = 'userDetail.html';
             link.id = 'persona' + id;
             link.addEventListener('click', bottonePersona);
-            link2.href = 'indexPost.html';
+            link2.href = 'userDetail.html#listaPost';
+            link2.id = 'postPersona' + i;
+            link2.addEventListener('click', bottonePost);
             link.setAttribute("class","dettagli");
 
             td.innerHTML = user.name;
@@ -48,8 +50,13 @@ function pageLoad(){
 
         function bottonePersona(e){
             var idPersona = e.target.id;
-            console.log(idPersona.substring(3,idPersona.length));
-            localStorage.idPersona = idPersona.substring(7,idPersona.length);
+            localStorage.idPersona = idPersona.substring(7, idPersona.length);
+        }
+
+        function bottonePost(e){
+            var idPersona = e.target.id;
+            alert(idPersona.substring(11, idPersona.length));
+            localStorage.idPersona = idPersona.substring(11, idPersona.length);
         }
     });
     $('#sendNewUser').click(newUser);
@@ -58,14 +65,5 @@ function pageLoad(){
 
 
  function newUser(){
-    $.ajax({
-        type: 'POST',
-        data: $('#formNuovoUtente').serialize(),
-        url: urlUserPost,
-        success: sendNewUserOK
-    });
- }
- 
- function sendNewUserOK(){
-     alert('Dati correttamente inseriti');
+    inserisciRecord(urlBaseJSONPlaceholder + '/users', $('#formNuovoUtente').serialize());
  }

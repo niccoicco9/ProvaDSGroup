@@ -12,7 +12,8 @@ function creaBottoneConImmagine(id,linkImmagine, valore){
 
 function eliminaInsiemeElementi(arrayElementiDaEliminare){
     for(var i = 0; i < arrayElementiDaEliminare.length; i++){
-        $('#' + arrayElementiDaEliminare[i]).remove();
+        //$('#' + arrayElementiDaEliminare[i]).remove();
+        document.getElementById(arrayElementiDaEliminare[i]).remove();
     }
 }
 
