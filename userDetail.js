@@ -158,7 +158,7 @@ function cambiaBottoni() {
 
 function inviaNotifiche() {
     $.ajax({
-        url: urlBaseJSONPlaceholder + 'users/' + localStorage.idPe,
+        url: urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona,
         type: 'put',
         data: $('#formDati').serialize(),
         success: function () {
