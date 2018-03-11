@@ -84,6 +84,7 @@ function requestPostsUser(userId) {
 
 function actionDeleteButton() {
     eliminaRecord(urlBaseJSONPlaceholder + 'users/' + personaRipristino.id);
+    location.href = 'index.html';
 }
 
 function actionModifyButton() {

@@ -21,6 +21,7 @@ function pageLoad() {
 
 function deleteButtonAction() {
     eliminaRecord(urlBasePost + localStorage.idPost);
+    location.href ='userDetail.html';
 }
 
 function modifyButtonAction() {
