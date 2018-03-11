@@ -7,10 +7,9 @@ var containerElementiDaModificare = ['nameContainer', 'usernameContainer', 'stre
 $(document).ready(function () {
     $.getJSON(urlBaseJSONPlaceholder + 'users/' + localStorage.idPersona, function (persona) {
         personaRipristino = persona;
-        console.log(document.getElementById('address.city'));
         bindingUser(persona);
         drawMaps(persona);
-        requestPostUser(persona.id);
+        requestPostsUser(persona.id);
 
         $('#modifyButton').click(actionModifyButton);
         $('#deleteButton').click(actionDeleteButton);
@@ -53,7 +52,7 @@ function drawMaps(persona) {
 
 
 //Creazione della tabella dei post
-function requestPostUser(userId) {
+function requestPostsUser(userId) {
     var url = urlBaseJSONPlaceholder + 'posts?userId=' + 4;
     $.getJSON(url, function (result) {
 
@@ -92,11 +91,11 @@ function requestPostUser(userId) {
     });
 }
 
-function actionDeleteButton(){
+function actionDeleteButton() {
     eliminaRecord(urlBaseJSONPlaceholder + 'users/' + personaRipristino.id);
 }
 
-function actionModifyButton(){
+function actionModifyButton() {
     var elementiDaEliminare = ['name', 'username', 'address.street', 'address.suite', 'address.city', 'address.zipcode', 'phone', 'website', 'company.name', 'company.catchPhrase', 'company.bs', 'modifyButton', 'deleteButton'];
     eliminaInsiemeElementi(elementiDaEliminare);
 
@@ -112,43 +111,51 @@ function actionModifyButton(){
     $('#sloganContainer').append(creaInput(personaRipristino.company.catchPhrase, 'company.catchPhrase'));
     $('#bsContainer').append(creaInput(personaRipristino.company.bs, 'company.bs'));
 
-    $('#actionButton').append(
-        creaBottoneConImmagine('acceptButton','IMG/accetta.png', 'Accetta modifiche') +
-        creaBottoneConImmagine('refusedButton','IMG/ripristina.png', 'Ripristina')
+    creazioneBottoniera(
+        ['acceptButton', 'refusedButton'],
+        ['IMG/accetta.png', 'IMG/ripristina.png'],
+        ['Accetta modifiche', 'Ripristina'],
+        [actionAcceptModifyButton, actionRefusedButton]
     );
-
-    $('#acceptButton').click(actionAcceptModifyButton);
-    $('#refusedButton').click(actionRefusedButton);
 }
 
 
-function actionRefusedButton(){
+function creazioneBottoniera(arrayID, arrayImmagini, arrayValori, arrayAzioni) {
+    for (var i = 0; i < arrayID.length; i++) {
+        $('#actionButton').append(
+            creaBottoneConImmagine(arrayID[i], arrayImmagini[i], arrayValori[i])
+        );
+        $('#' + arrayID[i]).attr('class', 'btn btn-default btn-sm');
+        $('#' + arrayID[i]).click(arrayAzioni[i]);
+    }
+}
+
+function actionRefusedButton() {
     var elementiDaEliminare = ['name', 'username', 'address.street', 'address.suite', 'address.city', 'address.zipcode', 'phone', 'website', 'company.name', 'company.catchPhrase', 'company.bs', 'acceptButton', 'refusedButton'];
     eliminaInsiemeElementi(elementiDaEliminare);
 
-    $('#nameContainer').append( creaRiempiElementoConId('div', personaRipristino.name, 'name'));
-    $('#usernameContainer').append( creaRiempiElementoConId('div', personaRipristino.username, 'username'));
-    $('#streetContainer').append( creaRiempiElementoConId('div', personaRipristino.address.street, 'address.street'));
-    $('#suiteContainer').append( creaRiempiElementoConId('div', personaRipristino.address.suite, 'address.suite'));
-    $('#cityContainer').append( creaRiempiElementoConId('div', personaRipristino.address.city, 'address.city'));
-    $('#zipCodeContainer').append( creaRiempiElementoConId('div', personaRipristino.address.zipcode, 'address.zipcode'));
-    $('#phoneContainer').append( creaRiempiElementoConId('div', personaRipristino.phone, 'phone'));
-    $('#websiteContainer').append( creaRiempiElementoConId('div', personaRipristino.website, 'website'));
-    $('#nameCompanyContainer').append( creaRiempiElementoConId('div', personaRipristino.company.name, 'company.name'));
-    $('#sloganContainer').append( creaRiempiElementoConId('div', personaRipristino.company.catchPhrase, 'company.catchPhrase'));
-    $('#bsContainer').append( creaRiempiElementoConId('div', personaRipristino.company.bs, 'company.bs'));
+    $('#nameContainer').append(creaRiempiElementoConId('div', personaRipristino.name, 'name'));
+    $('#usernameContainer').append(creaRiempiElementoConId('div', personaRipristino.username, 'username'));
+    $('#streetContainer').append(creaRiempiElementoConId('div', personaRipristino.address.street, 'address.street'));
+    $('#suiteContainer').append(creaRiempiElementoConId('div', personaRipristino.address.suite, 'address.suite'));
+    $('#cityContainer').append(creaRiempiElementoConId('div', personaRipristino.address.city, 'address.city'));
+    $('#zipCodeContainer').append(creaRiempiElementoConId('div', personaRipristino.address.zipcode, 'address.zipcode'));
+    $('#phoneContainer').append(creaRiempiElementoConId('div', personaRipristino.phone, 'phone'));
+    $('#websiteContainer').append(creaRiempiElementoConId('div', personaRipristino.website, 'website'));
+    $('#nameCompanyContainer').append(creaRiempiElementoConId('div', personaRipristino.company.name, 'company.name'));
+    $('#sloganContainer').append(creaRiempiElementoConId('div', personaRipristino.company.catchPhrase, 'company.catchPhrase'));
+    $('#bsContainer').append(creaRiempiElementoConId('div', personaRipristino.company.bs, 'company.bs'));
 
-    $('#actionButton').append(
-        creaBottoneConImmagine('modifyButton', 'IMG/modifica.png', 'Modifica utente') + 
-        creaBottoneConImmagine('deleteButton', 'IMG/cancella.png', 'Cancella utente')
+    creazioneBottoniera(
+        ['modifyButton', 'deleteButton'],
+        ['IMG/modifica.png', 'IMG/cancella.png'],
+        ['Modifica utente', 'Elimina utente'],
+        [actionModifyButton, actionDeleteButton]
     );
-
-    $('#modifyButton').click(actionModifyButton);
-    $('#deleteButton').click(actionDeleteButton);
 }
 
 
-function actionAcceptModifyButton(){
+function actionAcceptModifyButton() {
     personaRipristino.name = document.getElementById('name').value;
     personaRipristino.username = document.getElementById('username').value;
     personaRipristino.address.street = document.getElementById('address.street').value;
@@ -166,6 +173,6 @@ function actionAcceptModifyButton(){
 }
 
 
-function sendPostAction(){
+function sendPostAction() {
     inserisciRecord(urlBaseJSONPlaceholder + 'posts/', $('#formNuovoPost').serialize());
 }
