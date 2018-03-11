@@ -57,30 +57,21 @@ function requestPostsUser(userId) {
     $.getJSON(url, function (result) {
 
         for (var i = 0; i < result.length; i++) {
-            //Creo il td del nome
-            var elementTdNamePost = document.createElement('td');
-            elementTdNamePost.id = 'tdName' + i;
-            elementTdNamePost.textContent = result[i].title;
+            //Creo l'anchor tag
+            var link = creaRiempiElementoConId('a','Dettagli', 'btn' + i);
 
-            //Creo il td del link della pagina del dettaglio
-            var elementTdDetailPost = document.createElement('td');
-            elementTdDetailPost.id = 'tdDetail' + i;
+            //Creo gli elementi che comporranno la riga della tabella
+            var elementiTD = 
+                creaRiempiElementoConId('td', result[i].title, 'tdName' + i) + 
+                creaRiempiElementoConId('td', link, 'tdDetail' + i);
+            
+            //Creo e popolo la riga della tabella
+            var elementoTR = creaRiempiElementoConId('tr', elementiTD, 'tr' + result[i].id);
+            $('#bodyTable').append(elementoTR);
 
-            var button = document.createElement('a');
-            button.id = 'btn' + result[i].id;
-            button.textContent = 'Dettagli';
-            button.href = 'indexPost.html';
-            button.addEventListener('click', bottoneClick);
-            elementTdDetailPost.append(button);
-
-            //Creo il tr che contiene i td appena creati
-            var elementTr = document.createElement('tr');
-            elementTr.id = 'tr' + i;
-            elementTr.append(elementTdNamePost);
-            elementTr.append(elementTdDetailPost);
-
-            //Aggiungo la riga alla tabella
-            $('#bodyTable').append(elementTr);
+            //Do funzionalità ai link
+            $('#btn' + i).click(bottoneClick);
+            $('#btn' + i).attr('href','indexPost.html');
         }
 
 

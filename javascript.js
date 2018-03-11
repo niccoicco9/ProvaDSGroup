@@ -12,40 +12,25 @@ const user = fetch(urlBaseJSONPlaceholder + 'users')
   .then(json => json);
 
 function pageLoad(){
-    user.then(function(data){
+    user.then(function(users){
 
-        for(let i = 0; i< data.length; i++){
-            const link =document.createElement('a'); 
-            const link2 =document.createElement('a'); 
-            const user = data[i];
-            const id = user.id;
-            const tbody = document.getElementById('tableBody');
-            const tr = document.createElement('tr');
-            const td = document.createElement('td');
-            const td1 = document.createElement('td');
-            const td2 = document.createElement('td');
-            const td3 = document.createElement('td');
+        for(let i = 0; i< users.length; i++){
+            var link = creaRiempiElementoConId('a','Dettagli', 'persona' + users[i].id);
+            var link2 = creaRiempiElementoConId('a','Post', 'postPersona' + users[i].id);
+            var elementiTD = 
+                creaRiempiElementoConId('td', users[i].name, 'tdName' + i) +
+                creaRiempiElementoConId('td', users[i].username, 'tdUsername' + i) +  
+                creaRiempiElementoConId('td', link, 'tdPersona' + users[i].id) +
+                creaRiempiElementoConId('td', link2, 'tdPostPersona' + users[i].id);
             
-            link.href = 'userDetail.html';
-            link.id = 'persona' + id;
-            link.addEventListener('click', bottonePersona);
-            link2.href = 'userDetail.html#listaPost';
-            link2.id = 'postPersona' + id;
-            link2.addEventListener('click', bottonePost);
-            link.setAttribute("class","dettagli");
+            var elementoTR = creaRiempiElementoConId('tr', elementiTD, 'row' + i);
+            $('tbody').append(elementoTR);
 
-            td.innerHTML = user.name;
-            td1.innerHTML = user.username;
-            link.innerHTML = 'Dettagli';
-            link2.innerHTML = 'Post';
-            td2.appendChild(link);
-            td3.appendChild(link2);
-            
-            tbody.appendChild(tr);
-            tr.appendChild(td);
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tr.appendChild(td3);
+            $('#persona' + users[i].id).click(bottonePersona);
+            $('#postPersona' + users[i].id).click(bottonePost);
+
+            $('#persona' + users[i].id).attr('href', 'userDetail.html');
+            $('#postPersona' + users[i].id).attr('href', 'userDetail.html#listaPost');
         }
 
         function bottonePersona(e){
