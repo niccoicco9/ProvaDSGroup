@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-var urlUserPost = 'https://jsonplaceholder.typicode.com/users';
+var urlBaseJSONPlaceholder = 'https://jsonplaceholder.typicode.com/';
 
 
 window.addEventListener('load',function(){
@@ -7,7 +7,7 @@ window.addEventListener('load',function(){
 });
 
 
-const user = fetch(urlUserPost)
+const user = fetch(urlBaseJSONPlaceholder + 'users')
   .then(response => response.json())
   .then(json => json);
 
@@ -30,7 +30,7 @@ function pageLoad(){
             link.id = 'persona' + id;
             link.addEventListener('click', bottonePersona);
             link2.href = 'userDetail.html#listaPost';
-            link2.id = 'postPersona' + i;
+            link2.id = 'postPersona' + id;
             link2.addEventListener('click', bottonePost);
             link.setAttribute("class","dettagli");
 
@@ -55,7 +55,6 @@ function pageLoad(){
 
         function bottonePost(e){
             var idPersona = e.target.id;
-            alert(idPersona.substring(11, idPersona.length));
             localStorage.idPersona = idPersona.substring(11, idPersona.length);
         }
     });
@@ -65,5 +64,5 @@ function pageLoad(){
 
 
  function newUser(){
-    inserisciRecord(urlBaseJSONPlaceholder + '/users', $('#formNuovoUtente').serialize());
+    inserisciRecord(urlBaseJSONPlaceholder + 'users', $('#formNuovoUtente').serialize());
  }
