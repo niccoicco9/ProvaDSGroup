@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,97 +9,139 @@
     <link rel="stylesheet" href="userDetail.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>User Detail</h1>
-    
-    <section id="userDataSection">
-        <form action="" id="formDati">
-            <article id="nameContainer" class="containerDati">
-                <label for="name"> Nome: </label>
-                <div id="name" name="name"></div>
-            </article>
+    <main class="container">
+        <h1 id="titolo"></h1>
 
-            <article id="surnameContainer" class="containerDati">
-                <label for="username">Username: </label>
-                <div id="username" name="username"></div>
-            </article>
+        <section id="userDataSection" class="effettoOmbra">
+            <form action="" id="formDati">
+                <article id="nameContainer" class="containerDati">
+                    <label for="name"> Nome: </label>
+                    <div id="name" name="name"></div>
+                </article>
 
-            <article id="streetContainer" class="containerDati">
-                <label for="address.street">Strada: </label>
-                <div id="address.street" name="address.street"></div>
-            </article>
+                <article id="usernameContainer" class="containerDati">
+                    <label for="username">Username: </label>
+                    <div id="username" name="username"></div>
+                </article>
 
-            <article id="suiteContainer" class="containerDati">
-                <label for="address.suite">Appartamento: </label>
-                <div id="address.suite" name="address.suite"></div>
-            </article>
+                <article id="streetContainer" class="containerDati">
+                    <label for="address.street">Strada: </label>
+                    <div id="address.street" name="address.street"></div>
+                </article>
 
-            <article id="cityContainer" class="containerDati">
-                <label for="address.city">Città: </label>
-                <div id="address.city" name="address.city"></div>
-            </article>
+                <article id="suiteContainer" class="containerDati">
+                    <label for="address.suite">Appartamento: </label>
+                    <div id="address.suite" name="address.suite"></div>
+                </article>
 
-            <article id="zipCodeContainer" class="containerDati">
-                <label for="address.zipcode">CAP: </label>
-                <div id="address.zipcode" name="address.zipcode"></div>
-            </article>
+                <article id="cityContainer" class="containerDati">
+                    <label for="address.city">Città: </label>
+                    <div id="address.city" name="address.city"></div>
+                </article>
 
-            <article id="phoneContainer" class="containerDati">
-                <label for="phone">Telefono: </label>
-                <div name="phone" id="phone"></div>
-            </article>
+                <article id="zipCodeContainer" class="containerDati">
+                    <label for="address.zipcode">CAP: </label>
+                    <div id="address.zipcode" name="address.zipcode"></div>
+                </article>
 
-            <article id="websiteContainer" class="containerDati">
-                <label for="website">Sito web: </label>
-                <div id="website" name="website"></div>
-            </article>
+                <article id="phoneContainer" class="containerDati">
+                    <label for="phone">Telefono: </label>
+                    <div name="phone" id="phone"></div>
+                </article>
 
-            <article id="nameCompanyContainer" class="containerDati">
-                <label for="company.name">Nome compagnia: </label>
-                <div id="company.name" name="company.name"></div>
-            </article>
+                <article id="websiteContainer" class="containerDati">
+                    <label for="website">Sito web: </label>
+                    <div id="website" name="website"></div>
+                </article>
 
-            <article id="sloganContainer" class="containerDati">
-                <label for="company.catchPhrase">Slogan: </label>
-                <div id="company.catchPhrase" name="company.catchPhrase"></div>
-            </article>
+                <article id="nameCompanyContainer" class="containerDati">
+                    <label for="company.name">Nome compagnia: </label>
+                    <div id="company.name" name="company.name"></div>
+                </article>
 
-            <article id="bsContainer" class="containerDati">
-                <label for="company.bs">Mansione: </label>
-                <div id="company.bs" name="company.bs"></div>
-            </article>
-        </form>
+                <article id="sloganContainer" class="containerDati">
+                    <label for="company.catchPhrase">Slogan: </label>
+                    <div id="company.catchPhrase" name="company.catchPhrase"></div>
+                </article>
 
-        <div id="actionButton">
-            <button id="modifyButton"><img src="IMG/modifica.png"> Modifica Utente</img></button>
-            <button id="deleteButton"><img src="IMG/cancella.png"> Cancella Utente</button>
-            <button id="accettaModifiche" style="visibility: hidden"><img src="IMG/accetta.png"> Accetta</img></button>
-            <button id="ripristina" style="visibility: hidden"><img src="IMG/ripristina.png"> Ripristina</img></button>
-        </div>
-    </section>
+                <article id="bsContainer" class="containerDati">
+                    <label for="company.bs">Mansione: </label>
+                    <div id="company.bs" name="company.bs"></div>
+                </article>
+            </form>
 
-    <section id="mapSection"></section>
+            <div id="actionButton" class="actionButtonClass">
+                <button id="modifyButton" class="btn btn-default btn-sm">
+                    <img src="IMG/modifica.png"> Modifica Utente
+                </button>
+                <button id="deleteButton" class="btn btn-default btn-sm">
+                    <img src="IMG/cancella.png"> Cancella Utente
+                </button>
+            </div>
 
-    <section id="tableSection">
-        <div><h3>Post</h3></div>
-        <table class="table table-bordered" id="caratteristiche">
-            <thead>
-                <tr>
-                    <td>Nome</td>
-                    <td>Dettagli</td>
-                </tr>
-            </thead>
+            <div id="mapSection"></div>
+        </section>
 
-            <tbody id="bodyTable">
 
-            </tbody>
-        </table>
-    </section>
-</div>
+        <section>
+            <div>
+                <h3>Nuovo post</h3>
+            </div>
+
+            <div class="effettoOmbra">
+                <form class="well form-horizontal" action="" method="post" id="formNuovoPost">
+                    <fieldset>
+                        <!-- Text input-->
+
+                        <div class="form-group">
+                            <div>
+                                <label for="title">Titolo</label>
+                                <input name="title" id="title" placeholder="Titolo del post" class="form-control" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="body">Testo del post</label>
+                            <textarea class="form-control" id="body" rows="3" placeholder="Inserisci il testo del tuo post..."></textarea>
+                        </div>
+
+                        <div class="form-group actionButtonClass">
+                            <button type="button" id="sendPost" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-send"></span> Invia
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+
+        <section id="tableSection">
+            <div>
+                <h3>I tuoi post</h3>
+            </div>
+            <table class="table table-bordered table-hover table-striped effettoOmbra" id="caratteristiche">
+                <thead>
+                    <tr>
+                        <td>Nome</td>
+                        <td>Dettagli</td>
+                    </tr>
+                </thead>
+
+                <tbody id="bodyTable">
+
+                </tbody>
+            </table>
+            <a name="listaPost"></a>
+        </section>
+    </main>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="helper.js"></script>
+    <script src="services.js"></script>
     <script src="userDetail.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1EHAsI359U-bXcnQc_2QdDCZ7eG4T8ZA"></script>
 </body>
+
 </html>

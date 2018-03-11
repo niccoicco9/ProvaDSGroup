@@ -1,17 +1,27 @@
-body{
-    background-image: url(http://www.miniscript.it/images/1306136252online_user_ip.png)
-}
 table{
     background-color: white !important;
 }
-table td,tr,th{
-    border: 2px solid black !important;
-}
-form{
-    background-color: white !important;
-}
+
+
 button{
     background-color: steelblue !important;
     border-color: skyblue !important;
 }
-#success_message{ display: none;}
+
+.actionButton{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+h1{
+    text-align: center;
+}
+
+section{
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #333;
+    margin-bottom: 50px;
+}
+
+

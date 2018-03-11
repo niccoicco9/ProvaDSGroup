@@ -6,37 +6,41 @@ window.addEventListener('load', function () {
 });
 
 function pageLoad() {
-    fetch( urlBasePost + localStorage.idPost)
+    fetch(urlBasePost + localStorage.idPost)
         .then(response => response.json())
         .then(function (data) {
             actualPost = data;
-            document.getElementById('title').textContent = actualPost.title;
-            document.getElementById('body').textContent = actualPost.body;
-            
+            $('#headingTitle').text(actualPost.title);
+            $('#title').text(actualPost.title);
+            $('#body').text(actualPost.body);
+
             $('#btnDelete').click(deleteButtonAction);
             $('#btnModify').click(modifyButtonAction);
         });
 }
 
-function deleteButtonAction(){
-    $.ajax({
-        type: 'delete',
-        url: urlBasePost + localStorage.idPost,
-        success: alertMessaggio('La cancellazione del post è stata effettuata')
-    });
+function deleteButtonAction() {
+    eliminaRecord(urlBasePost + localStorage.idPost);
+    location.href ='userDetail.html';
 }
 
-function modifyButtonAction(){
-    var title = document.getElementById('title').textContent;
-    var body = document.getElementById('body').textContent;
+function modifyButtonAction() {
+    var title = $('#title').text();
+    var body = $('#body').text();
 
-    eliminaInsiemeElementi(['title','body', 'btnDelete', 'btnModify']);
-    $('#contenitore').append(
-        creaInput(title,'title') + 
-        creaInput(body,'body') + 
-        creaBottoneConImmagine('btnAccept','IMG/accetta.png','Accetta') + 
-        creaBottoneConImmagine('btnRefused','IMG/ripristina.png','Ripristina')
+    eliminaInsiemeElementi(['title', 'body', 'btnDelete', 'btnModify']);
+    $('#titleContainer').append(creaInput(title, 'title'));
+    $('#bodyContainer').append(creaRiempiElementoConId('textarea', body, 'body'));
+    $('#actionButton').append(
+        creaBottoneConImmagine('btnAccept', 'IMG/accetta.png', 'Accetta') +
+        creaBottoneConImmagine('btnRefused', 'IMG/ripristina.png', 'Ripristina')
     );
+
+    $('#title').attr('class', 'componentiPost form-control');
+    $('#body').attr('class', 'componentiPost form-control');
+    $('#body').attr('rows',5);
+    $('#btnAccept').attr('class', 'buttonStyle btn btn-default btn-sm');
+    $('#btnRefused').attr('class', 'buttonStyle btn btn-default btn-sm');
     $('#btnAccept').click(accettaModificheAction);
     $('#btnRefused').click(rifiutaModificheAction);
 }
@@ -45,19 +49,24 @@ function modifyButtonAction(){
 
 
 
-function rifiutaModificheAction(){
-    eliminaInsiemeElementi(['title','body', 'btnAccept', 'btnRefused']);
-    $('#contenitore').append(
-        creaRiempiElementoConId('h3', actualPost.title, 'title') +
-        creaRiempiElementoConId('div', actualPost.body, 'body') +
-        creaBottoneConImmagine('btnDelete', 'IMG/cancella.png', 'Cancella Post') +
+function rifiutaModificheAction() {
+    eliminaInsiemeElementi(['title', 'body', 'btnAccept', 'btnRefused']);
+    $('#headingTitle').text(actualPost.title);
+    $('#titleContainer').append(creaRiempiElementoConId('div', actualPost.title, 'title'));
+    $('#bodyContainer').append(creaRiempiElementoConId('div', actualPost.body, 'body'));
+    $('#actionButton').append(creaBottoneConImmagine('btnDelete', 'IMG/cancella.png', 'Cancella Post') +
         creaBottoneConImmagine('btnModify', 'IMG/modifica.png', 'Modifica')
     );
+
+    $('#title').attr('class', 'componentiPost');
+    $('#body').attr('class', 'componentiPost');
+    $('#btnDelete').attr('class', 'buttonStyle btn btn-default btn-sm');
+    $('#btnModify').attr('class', 'buttonStyle btn btn-default btn-sm');
     $('#btnDelete').click(deleteButtonAction);
     $('#btnModify').click(modifyButtonAction);
 }
 
-function accettaModificheAction(){
+function accettaModificheAction() {
     //Modificare l'oggetto actualPost mi consente in un colpo solo di tenere aggiornati i dati
     //localmente e di poter poi andare a ripristinare gli elementi precedenti
     actualPost.title = $('#title').val();

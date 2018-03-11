@@ -7,12 +7,13 @@ function creaInput(valore, id){
 }
 
 function creaBottoneConImmagine(id,linkImmagine, valore){
-    return '<button type="button" id="' + id + '"> <img src="' + linkImmagine + '"> ' + valore + '</img></button>';
+    return '<button type="button" id="' + id + '"> <img src="' + linkImmagine + '"> ' + valore + '</button>';
 }
 
 function eliminaInsiemeElementi(arrayElementiDaEliminare){
     for(var i = 0; i < arrayElementiDaEliminare.length; i++){
-        $('#' + arrayElementiDaEliminare[i]).remove();
+        //$('#' + arrayElementiDaEliminare[i]).remove();
+        document.getElementById(arrayElementiDaEliminare[i]).remove();
     }
 }
 
