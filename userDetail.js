@@ -53,12 +53,12 @@ function drawMaps(persona) {
 
 //Creazione della tabella dei post
 function requestPostsUser(userId) {
-    var url = urlBaseJSONPlaceholder + 'posts?userId=' + 4;
+    var url = urlBaseJSONPlaceholder + 'posts';
     $.getJSON(url, function (result) {
 
         for (var i = 0; i < result.length; i++) {
             //Creo l'anchor tag
-            var link = creaRiempiElementoConId('a','Dettagli', 'btn' + i);
+            var link = creaRiempiElementoConId('a','Dettagli', 'btn' + result[i].id);
 
             //Creo gli elementi che comporranno la riga della tabella
             var elementiTD = 
