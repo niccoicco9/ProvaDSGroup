@@ -53,7 +53,7 @@ function drawMaps(persona) {
 
 //Creazione della tabella dei post
 function requestPostsUser(userId) {
-    var url = urlBaseJSONPlaceholder + 'posts';
+    var url = urlBaseJSONPlaceholder + 'posts?userId=' + userId;
     $.getJSON(url, function (result) {
 
         for (var i = 0; i < result.length; i++) {
